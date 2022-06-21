@@ -12,6 +12,7 @@ import { AppService } from './app.service';
   //import mongoose
   MongooseModule.forRoot(process.env.MONGO_URL, {
     //todo session 4-2
+
   }),
 ],
   controllers: [AppController],
