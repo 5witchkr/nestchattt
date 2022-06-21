@@ -9,7 +9,12 @@ export class AppController {
   @Get()
   @Render('index')
   root() {
-    return {message: "root point"};
+    return {
+      data: {
+        title: 'Chattings',
+        copyright: 'name',
+      },
+    };
   }
 
 
