@@ -13,16 +13,18 @@ export class ChatGateway implements OnGatewayInit, OnGatewayConnection, OnGatewa
 
    //lifecycle
 
+  afterInit() {
+    this.logger.log('init');
+  }
+
+
+
   handleDisconnect(@ConnectedSocket() socket: Socket) {
     this.logger.log(`disconnected: ${socket.id} ${socket.nsp.name}`);
   }
 
   handleConnection(@ConnectedSocket() socket: Socket) {
       this.logger.log(`connected: ${socket.id} ${socket.nsp.name}`);
-  }
-
-  afterInit() {
-      this.logger.log('init');
   }
 
   //lifecycle
@@ -33,8 +35,13 @@ export class ChatGateway implements OnGatewayInit, OnGatewayConnection, OnGatewa
     @ConnectedSocket() socket: Socket){
     console.log(socket.id);
     console.log(username);
-    socket.emit('hello_user' + username);
-    return 'hello world';
+
+    //username db save
+
+    //broadcast (all connected socket)
+    socket.broadcast.emit('user_connected', username);
+
+    return username;
   }
 }
 
